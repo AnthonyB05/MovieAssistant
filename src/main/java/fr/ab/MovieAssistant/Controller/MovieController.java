@@ -27,11 +27,7 @@ public class MovieController {
     @PostMapping("/request")
     public ResponseEntity<WebhookReponseDTO> postRequest(@RequestBody QueryRequestDTO queryRequestDTO) {
 
-        if(queryRequestDTO.getQueryResult()==null) {
-            return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
-        }
-
-        if(queryRequestDTO.getQueryResult().getQueryText()==null) {
+        if(queryRequestDTO.getQueryResult()==null ||queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getParameters()==null || queryRequestDTO.getQueryResult().getParameters().getGenre()==null ) {
             return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
         }
 
