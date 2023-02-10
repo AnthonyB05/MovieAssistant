@@ -1,12 +1,13 @@
 package fr.ab.MovieAssistant.DTO;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class WebhookReponseDTO implements Serializable {
     private String fulfillmentText;
-    private String fulfillmentMessages;
+    private List<MessageDTO> fulfillmentMessages;
     private String source;
-    private PayloadDTO payload;
+    private String payload;
     private String outputContexts;
     private String followupEventInput;
     private String sessionEntityTypes;
@@ -19,12 +20,20 @@ public class WebhookReponseDTO implements Serializable {
         this.fulfillmentText = fulfillmentText;
     }
 
-    public String getFulfillmentMessages() {
+    public List<MessageDTO> getFulfillmentMessages() {
         return fulfillmentMessages;
     }
 
-    public void setFulfillmentMessages(String fulfillmentMessages) {
+    public void setFulfillmentMessages(List<MessageDTO> fulfillmentMessages) {
         this.fulfillmentMessages = fulfillmentMessages;
+    }
+
+    public String getPayload() {
+        return payload;
+    }
+
+    public void setPayload(String payload) {
+        this.payload = payload;
     }
 
     public String getSource() {
@@ -33,14 +42,6 @@ public class WebhookReponseDTO implements Serializable {
 
     public void setSource(String source) {
         this.source = source;
-    }
-
-    public PayloadDTO getPayload() {
-        return payload;
-    }
-
-    public void setPayload(PayloadDTO payload) {
-        this.payload = payload;
     }
 
     public String getOutputContexts() {

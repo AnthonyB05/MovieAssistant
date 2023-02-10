@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("api/movie")
 public class MovieController {
+
+    private final List<String> genres = List.of("action", "horreur", "comédie", "drame", "romance", "aventure");
 
     @Autowired
     private MovieService movieService;
@@ -34,12 +37,17 @@ public class MovieController {
 
         if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
             webhookReponseDTO.setFulfillmentText("Quel genre de film cherchez-vous ?");
-            PayloadDTO payloadDTO = new PayloadDTO();
-            payloadDTO.setType("chips");
-            OptionDTO optionDTO = new OptionDTO();
-            optionDTO.setText(List.of("action", "horreur", "comédie", "drame", "romance", "aventure"));
-            payloadDTO.setOptions(optionDTO);
-            webhookReponseDTO.setPayload(payloadDTO);
+            List<MessageDTO> messageDTOList = new ArrayList<>();
+
+            for (String genre : genres) {
+                MessageDTO messageDTO = new MessageDTO();
+                SuggestionDTO suggestionDTO = new SuggestionDTO();
+                suggestionDTO.setTitle(genre);
+                messageDTO.setSuggestion(suggestionDTO);
+                messageDTOList.add(messageDTO);
+            }
+
+            webhookReponseDTO.setFulfillmentMessages(messageDTOList);
 
         }else{
             webhookReponseDTO = movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());

@@ -1,8 +1,7 @@
 package fr.ab.MovieAssistant.DTO;
 
-import java.io.Serializable;
 
-public class ParameterDTO  implements Serializable {
+public class ParameterDTO{
     private String genre;
 
     public String getGenre() {
