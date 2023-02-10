@@ -31,7 +31,7 @@ public class MovieController {
             return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
         }
 
-        return  ResponseEntity.ok(movieService.getMovie(queryRequestDTO.getQueryResult().getQueryText().toLowerCase()));
+        return  ResponseEntity.ok(movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase()));
     }
 
 }
