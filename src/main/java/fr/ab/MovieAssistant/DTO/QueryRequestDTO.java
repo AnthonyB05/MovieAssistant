@@ -1,6 +1,8 @@
 package fr.ab.MovieAssistant.DTO;
 
-public class QueryRequestDTO {
+import java.io.Serializable;
+
+public class QueryRequestDTO  implements Serializable {
     private QueryResultDTO queryResult;
 
     public QueryResultDTO getQueryResult() {

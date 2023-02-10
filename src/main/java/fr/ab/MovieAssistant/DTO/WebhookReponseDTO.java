@@ -6,7 +6,7 @@ public class WebhookReponseDTO implements Serializable {
     private String fulfillmentText;
     private String fulfillmentMessages;
     private String source;
-    private String payload;
+    private PayloadDTO payload;
     private String outputContexts;
     private String followupEventInput;
     private String sessionEntityTypes;
@@ -35,11 +35,11 @@ public class WebhookReponseDTO implements Serializable {
         this.source = source;
     }
 
-    public String getPayload() {
+    public PayloadDTO getPayload() {
         return payload;
     }
 
-    public void setPayload(String payload) {
+    public void setPayload(PayloadDTO payload) {
         this.payload = payload;
     }
 
@@ -73,7 +73,7 @@ public class WebhookReponseDTO implements Serializable {
                 "fulfillmentText='" + fulfillmentText + '\'' +
                 ", fulfillmentMessages='" + fulfillmentMessages + '\'' +
                 ", source='" + source + '\'' +
-                ", payload='" + payload + '\'' +
+                ", payload=" + payload +
                 ", outputContexts='" + outputContexts + '\'' +
                 ", followupEventInput='" + followupEventInput + '\'' +
                 ", sessionEntityTypes='" + sessionEntityTypes + '\'' +

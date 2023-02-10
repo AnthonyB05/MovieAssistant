@@ -1,8 +1,6 @@
 package fr.ab.MovieAssistant.Controller;
 
-import fr.ab.MovieAssistant.DTO.QueryRequestDTO;
-import fr.ab.MovieAssistant.DTO.QueryResultDTO;
-import fr.ab.MovieAssistant.DTO.WebhookReponseDTO;
+import fr.ab.MovieAssistant.DTO.*;
 import fr.ab.MovieAssistant.Service.MovieService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +34,13 @@ public class MovieController {
 
         if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
             webhookReponseDTO.setFulfillmentText("Quel genre de film cherchez-vous ?");
+            PayloadDTO payloadDTO = new PayloadDTO();
+            payloadDTO.setType("chips");
+            OptionDTO optionDTO = new OptionDTO();
+            optionDTO.setText(List.of("action", "horreur", "comédie", "drame", "romance", "aventure"));
+            payloadDTO.setOptions(optionDTO);
+            webhookReponseDTO.setPayload(payloadDTO);
+
         }else{
             webhookReponseDTO = movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
         }
