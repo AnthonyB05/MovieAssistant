@@ -2,14 +2,12 @@ package fr.ab.MovieAssistant.Controller;
 
 import fr.ab.MovieAssistant.DTO.*;
 import fr.ab.MovieAssistant.Service.MovieService;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("api/movie")
@@ -36,16 +34,28 @@ public class MovieController {
         }
 
         if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
-            webhookReponseDTO.setFulfillmentText("Quel genre de film cherchez-vous ?");
             List<MessageDTO> messageDTOList = new ArrayList<>();
+
+            MessageDTO messageDTO = new MessageDTO();
+            messageDTO.setPlatform("ACTIONS_ON_GOOGLE");
+            SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
+            SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
+            simpleResponseDTO.setTextToSpeech("Quel genre de film cherchez-vous ?");
+            simpleResponsesDTO.setSimpleResponses(List.of(simpleResponseDTO));
+            messageDTO.setSimpleResponses(simpleResponsesDTO);
+            messageDTOList.add(messageDTO);
+
+
+            MessageDTO messageDTO2 = new MessageDTO();
+            messageDTO2.setPlatform("ACTIONS_ON_GOOGLE");
+            SuggestionsDTO suggestionsDTO = new SuggestionsDTO();
             for (String genre : genres) {
-                MessageDTO messageDTO = new MessageDTO();
-                messageDTO.setPlatform("ACTIONS_ON_GOOGLE");
                 SuggestionDTO suggestionDTO = new SuggestionDTO();
                 suggestionDTO.setTitle(genre);
-                messageDTO.setSuggestion(suggestionDTO);
-                messageDTOList.add(messageDTO);
+                suggestionsDTO.addSuggestion(suggestionDTO);
             }
+            messageDTO2.setSuggestions(suggestionsDTO);
+            messageDTOList.add(messageDTO2);
 
             webhookReponseDTO.setFulfillmentMessages(messageDTOList);
 

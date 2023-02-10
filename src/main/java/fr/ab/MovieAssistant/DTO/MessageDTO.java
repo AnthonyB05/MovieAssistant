@@ -2,15 +2,8 @@ package fr.ab.MovieAssistant.DTO;
 
 public class MessageDTO {
     private String platform;
-    private SuggestionDTO suggestion;
-
-    public SuggestionDTO getSuggestion() {
-        return suggestion;
-    }
-
-    public void setSuggestion(SuggestionDTO suggestion) {
-        this.suggestion = suggestion;
-    }
+    private SimpleResponsesDTO simpleResponses;
+    private SuggestionsDTO suggestions;
 
     public String getPlatform() {
         return platform;
@@ -20,11 +13,28 @@ public class MessageDTO {
         this.platform = platform;
     }
 
+    public SimpleResponsesDTO getSimpleResponses() {
+        return simpleResponses;
+    }
+
+    public void setSimpleResponses(SimpleResponsesDTO simpleResponses) {
+        this.simpleResponses = simpleResponses;
+    }
+
+    public SuggestionsDTO getSuggestions() {
+        return suggestions;
+    }
+
+    public void setSuggestions(SuggestionsDTO suggestions) {
+        this.suggestions = suggestions;
+    }
+
     @Override
     public String toString() {
         return "MessageDTO{" +
                 "platform='" + platform + '\'' +
-                ", suggestion=" + suggestion +
+                ", simpleResponses=" + simpleResponses +
+                ", suggestions=" + suggestions +
                 '}';
     }
 }
