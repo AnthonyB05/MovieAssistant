@@ -38,7 +38,6 @@ public class MovieController {
         if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
             webhookReponseDTO.setFulfillmentText("Quel genre de film cherchez-vous ?");
             List<MessageDTO> messageDTOList = new ArrayList<>();
-
             for (String genre : genres) {
                 MessageDTO messageDTO = new MessageDTO();
                 messageDTO.setPlatform("ACTIONS_ON_GOOGLE");
