@@ -22,7 +22,7 @@ public class MovieService {
         } else if(genre.equals("aventure")) {
             webhookReponseDTO.setFulfillmentText("Indiana Jones");
         } else {
-            webhookReponseDTO.setFulfillmentText("Je n'ai pas compris");
+            webhookReponseDTO.setFulfillmentText("Je ne connais pas de film de ce genre");
         }
 
         return webhookReponseDTO;
