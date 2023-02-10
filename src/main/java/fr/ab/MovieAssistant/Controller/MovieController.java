@@ -41,6 +41,7 @@ public class MovieController {
 
             for (String genre : genres) {
                 MessageDTO messageDTO = new MessageDTO();
+                messageDTO.setPlatform("ACTIONS_ON_GOOGLE");
                 SuggestionDTO suggestionDTO = new SuggestionDTO();
                 suggestionDTO.setTitle(genre);
                 messageDTO.setSuggestion(suggestionDTO);
