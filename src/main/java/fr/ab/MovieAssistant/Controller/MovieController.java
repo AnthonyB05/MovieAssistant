@@ -27,11 +27,20 @@ public class MovieController {
     @PostMapping("/request")
     public ResponseEntity<WebhookReponseDTO> postRequest(@RequestBody QueryRequestDTO queryRequestDTO) {
 
-        if(queryRequestDTO.getQueryResult()==null ||queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getParameters()==null || queryRequestDTO.getQueryResult().getParameters().getGenre()==null ) {
-            return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
+        WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
+
+        if(queryRequestDTO.getQueryResult()==null || queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getQueryText().equals("") || queryRequestDTO.getQueryResult().getParameters()==null ) {
+            webhookReponseDTO.setFulfillmentText("Je n'ai pas compris votre demande");
+            return  ResponseEntity.ok(webhookReponseDTO);
         }
 
-        return  ResponseEntity.ok(movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase()));
+        if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
+            webhookReponseDTO.setFulfillmentText("Quel genre de film cherchez-vous ?");
+        }else{
+            webhookReponseDTO = movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
+        }
+
+        return  ResponseEntity.ok(webhookReponseDTO);
     }
 
 }
