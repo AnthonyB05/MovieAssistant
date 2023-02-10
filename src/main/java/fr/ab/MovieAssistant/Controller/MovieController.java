@@ -1,5 +1,7 @@
 package fr.ab.MovieAssistant.Controller;
 
+import fr.ab.MovieAssistant.DTO.QueryRequestDTO;
+import fr.ab.MovieAssistant.DTO.QueryResultDTO;
 import fr.ab.MovieAssistant.DTO.WebhookReponseDTO;
 import fr.ab.MovieAssistant.Service.MovieService;
 import lombok.extern.java.Log;
@@ -23,12 +25,17 @@ public class MovieController {
     }
 
     @PostMapping("/request")
-    public ResponseEntity<WebhookReponseDTO> postRequest() {
-        String fulfillmentText = "Avatar 2";
-        WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
-        webhookReponseDTO.setFulfillmentText(fulfillmentText);
-        System.out.println("queryText = " + webhookReponseDTO);
-        return ResponseEntity.ok(webhookReponseDTO);
+    public ResponseEntity<WebhookReponseDTO> postRequest(@RequestBody QueryRequestDTO queryRequestDTO) {
+
+        if(queryRequestDTO.getQueryResult()==null) {
+            return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
+        }
+
+        if(queryRequestDTO.getQueryResult().getQueryText()==null) {
+            return ResponseEntity.ok(movieService.getMovie("Je n'ai pas compris"));
+        }
+
+        return  ResponseEntity.ok(movieService.getMovie(queryRequestDTO.getQueryResult().getQueryText().toLowerCase()));
     }
 
 }
