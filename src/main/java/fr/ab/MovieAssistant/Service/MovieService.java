@@ -5,14 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MovieService {
 
-    private final List<String> genres = List.of("action", "horreur", "comédie", "drame", "romance", "aventure");
+    private final List<String> genres = List.of("Action", "Aventure", "Animation", "Comédie", "Crime", "Drame", "Familial", "Fantastique", "Histoire", "Musique", "Mystère", "Romance", "Science-Fiction", "Téléfilm", "Thriller", "Western");
 
     private final String API_KEY = "api_key=f5762d995d659b32a1306b4e9da16f59";
     private final String LANGUAGE = "language=fr-FR";
@@ -73,7 +71,7 @@ public class MovieService {
                 for (DiscoverMovieDTO discoverMovieDTO : resultDM.getResults()) {
                     ItemDTO itemDTO = new ItemDTO();
                     SelectItemInfoDTO selectItemInfoDTO = new SelectItemInfoDTO();
-                    selectItemInfoDTO.setKey(discoverMovieDTO.getTitle());
+                    selectItemInfoDTO.setKey(discoverMovieDTO.getId().toString());
                     selectItemInfoDTO.setSynonyms(List.of(discoverMovieDTO.getTitle()));
                     itemDTO.setInfo(selectItemInfoDTO);
                     itemDTO.setTitle(discoverMovieDTO.getTitle());
@@ -85,7 +83,7 @@ public class MovieService {
                     itemDTOList.add(itemDTO);
                 }
 
-                carouselSelectDTO.setItems(itemDTOList.subList(0,3));
+                carouselSelectDTO.setItems(itemDTOList.subList(0, 3));
                 messageCarousel.setCarouselSelect(carouselSelectDTO);
                 messageDTOList.add(messageCarousel);
 
@@ -99,26 +97,6 @@ public class MovieService {
             simpleResponseDTO.setTextToSpeech("Je n'ai pas compris votre demande");
             return webhookReponseDTO;
         }
-
-
-
-
-      /*  if (genre.equals("action")) {
-            webhookReponseDTO.setFulfillmentText("Avenger");
-        } else if (genre.equals("horreur")) {
-            webhookReponseDTO.setFulfillmentText("Halloween");
-        } else if (genre.equals("comédie")) {
-            webhookReponseDTO.setFulfillmentText("Le père noël est une ordure");
-        } else if (genre.equals("drame")) {
-            webhookReponseDTO.setFulfillmentText("Le loup de Wall Street");
-        } else if (genre.equals("romance")) {
-            webhookReponseDTO.setFulfillmentText("Titanic");
-        } else if (genre.equals("aventure")) {
-            webhookReponseDTO.setFulfillmentText("Indiana Jones");
-        } else {
-            webhookReponseDTO.setFulfillmentText("Je ne connais pas de film de ce genre");
-        }*/
-
 
         return webhookReponseDTO;
     }
