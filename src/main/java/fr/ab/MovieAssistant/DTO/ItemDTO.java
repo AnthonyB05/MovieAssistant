@@ -2,17 +2,17 @@ package fr.ab.MovieAssistant.DTO;
 
 public class ItemDTO {
 
-    private SelectItemInfoDTO openUriAction;
+    private SelectItemInfoDTO info;
     private String title;
     private String description;
     private ImageDTO image;
 
-    public SelectItemInfoDTO getOpenUriAction() {
-        return openUriAction;
+    public SelectItemInfoDTO getInfo() {
+        return info;
     }
 
-    public void setOpenUriAction(SelectItemInfoDTO openUriAction) {
-        this.openUriAction = openUriAction;
+    public void setInfo(SelectItemInfoDTO info) {
+        this.info = info;
     }
 
     public String getTitle() {
