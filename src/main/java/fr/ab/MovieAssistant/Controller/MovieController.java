@@ -13,8 +13,6 @@ import java.util.List;
 @RequestMapping("api/movie")
 public class MovieController {
 
-    private final List<String> genres = List.of("action", "horreur", "comédie", "drame", "romance", "aventure");
-
     @Autowired
     private MovieService movieService;
 
@@ -26,44 +24,14 @@ public class MovieController {
     @PostMapping("/request")
     public ResponseEntity<WebhookReponseDTO> postRequest(@RequestBody QueryRequestDTO queryRequestDTO) {
 
-        WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
-
+        // Check if queryRequest is correct
         if(queryRequestDTO.getQueryResult()==null || queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getQueryText().equals("") || queryRequestDTO.getQueryResult().getParameters()==null ) {
+            WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
             webhookReponseDTO.setFulfillmentText("Je n'ai pas compris votre demande");
-            return  ResponseEntity.ok(webhookReponseDTO);
+            return ResponseEntity.ok(webhookReponseDTO);
         }
 
-        if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
-            List<MessageDTO> messageDTOList = new ArrayList<>();
-
-            MessageDTO messageDTO = new MessageDTO();
-            messageDTO.setPlatform("ACTIONS_ON_GOOGLE");
-            SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
-            SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
-            simpleResponseDTO.setTextToSpeech("Quel genre de film cherchez-vous ?");
-            simpleResponsesDTO.setSimpleResponses(List.of(simpleResponseDTO));
-            messageDTO.setSimpleResponses(simpleResponsesDTO);
-            messageDTOList.add(messageDTO);
-
-
-            MessageDTO messageDTO2 = new MessageDTO();
-            messageDTO2.setPlatform("ACTIONS_ON_GOOGLE");
-            SuggestionsDTO suggestionsDTO = new SuggestionsDTO();
-            for (String genre : genres) {
-                SuggestionDTO suggestionDTO = new SuggestionDTO();
-                suggestionDTO.setTitle(genre);
-                suggestionsDTO.addSuggestion(suggestionDTO);
-            }
-            messageDTO2.setSuggestions(suggestionsDTO);
-            messageDTOList.add(messageDTO2);
-
-            webhookReponseDTO.setFulfillmentMessages(messageDTOList);
-
-        }else{
-            webhookReponseDTO = movieService.getMovie(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
-        }
-
-        return  ResponseEntity.ok(webhookReponseDTO);
+        return ResponseEntity.ok(movieService.getMovie(queryRequestDTO));
     }
 
 }

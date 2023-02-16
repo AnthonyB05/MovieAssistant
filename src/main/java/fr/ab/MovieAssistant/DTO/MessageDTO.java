@@ -4,6 +4,7 @@ public class MessageDTO {
     private String platform;
     private SimpleResponsesDTO simpleResponses;
     private SuggestionsDTO suggestions;
+    private CarouselSelectDTO carouselSelect;
 
     public String getPlatform() {
         return platform;
@@ -29,14 +30,14 @@ public class MessageDTO {
         this.suggestions = suggestions;
     }
 
-    @Override
-    public String toString() {
-        return "MessageDTO{" +
-                "platform='" + platform + '\'' +
-                ", simpleResponses=" + simpleResponses +
-                ", suggestions=" + suggestions +
-                '}';
+    public CarouselSelectDTO getCarouselSelect() {
+        return carouselSelect;
     }
+
+    public void setCarouselSelect(CarouselSelectDTO carouselSelect) {
+        this.carouselSelect = carouselSelect;
+    }
+
 }
 
 
