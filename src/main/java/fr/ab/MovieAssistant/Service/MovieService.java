@@ -72,6 +72,10 @@ public class MovieService {
 
                 for (DiscoverMovieDTO discoverMovieDTO : resultDM.getResults()) {
                     ItemDTO itemDTO = new ItemDTO();
+                    SelectItemInfoDTO selectItemInfoDTO = new SelectItemInfoDTO();
+                    selectItemInfoDTO.setKey(discoverMovieDTO.getTitle());
+                    selectItemInfoDTO.setSynonyms(List.of(discoverMovieDTO.getTitle()));
+                    itemDTO.setInfo(selectItemInfoDTO);
                     itemDTO.setTitle(discoverMovieDTO.getTitle());
                     itemDTO.setDescription(discoverMovieDTO.getOverview());
                     ImageDTO imageDTO = new ImageDTO();
