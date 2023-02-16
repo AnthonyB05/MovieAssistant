@@ -47,7 +47,7 @@ public class MovieService {
 
         List<MessageDTO> messageDTOList = new ArrayList<>();
         MessageDTO messageSimpleResponse = new MessageDTO();
-
+        messageSimpleResponse.setPlatform("ACTIONS_ON_GOOGLE");
         SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
         SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
         simpleResponseDTO.setTextToSpeech("Voici les filmes que je te propose !!");
@@ -56,6 +56,7 @@ public class MovieService {
         messageDTOList.add(messageSimpleResponse);
 
         MessageDTO messageCarousel = new MessageDTO();
+        messageCarousel.setPlatform("ACTIONS_ON_GOOGLE");
         CarouselSelectDTO carouselSelectDTO = new CarouselSelectDTO();
         List<ItemDTO> itemDTOList = new ArrayList<>();
 
