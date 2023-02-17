@@ -5,6 +5,7 @@ public class MessageDTO {
     private SimpleResponsesDTO simpleResponses;
     private SuggestionsDTO suggestions;
     private CarouselSelectDTO carouselSelect;
+    private BasicCardDTO basicCard;
 
     public String getPlatform() {
         return platform;
@@ -38,6 +39,13 @@ public class MessageDTO {
         this.carouselSelect = carouselSelect;
     }
 
+    public BasicCardDTO getBasicCard() {
+        return basicCard;
+    }
+
+    public void setBasicCard(BasicCardDTO basicCard) {
+        this.basicCard = basicCard;
+    }
 }
 
 

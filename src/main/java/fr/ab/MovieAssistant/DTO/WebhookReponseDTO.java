@@ -8,7 +8,7 @@ public class WebhookReponseDTO implements Serializable {
     private List<MessageDTO> fulfillmentMessages;
     private String source;
     private String payload;
-    private String outputContexts;
+    private ContextDTO outputContexts;
     private String followupEventInput;
     private String sessionEntityTypes;
 
@@ -44,11 +44,11 @@ public class WebhookReponseDTO implements Serializable {
         this.source = source;
     }
 
-    public String getOutputContexts() {
+    public ContextDTO getOutputContexts() {
         return outputContexts;
     }
 
-    public void setOutputContexts(String outputContexts) {
+    public void setOutputContexts(ContextDTO outputContexts) {
         this.outputContexts = outputContexts;
     }
 

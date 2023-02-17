@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MovieService {
@@ -20,20 +21,70 @@ public class MovieService {
     private final String API_discoverMovie = "/discover/movie";
     private final String API_movie = "/movie/";
     private final String API_IMAGE = "https://image.tmdb.org/t/p/original/";
+    private final String SITE_MOVIE_DB = "https://www.themoviedb.org/movie/";
 
 
     public WebhookReponseDTO getMovie(QueryRequestDTO queryRequestDTO) {
 
+        if (queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
+            return this.getGenreForUser();
+        } else {
+            List<ContextDTO> context = queryRequestDTO.getQueryResult().getOutputContexts();
+            for (ContextDTO contextDTO : context) {
+                if(contextDTO.getParameters().containsKey("OPTION")) {
+                   return this.getExplainMovie(contextDTO);
+                }
+            }
+            return this.getMovieByGenre(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
+        }
+    }
+
+    private WebhookReponseDTO getExplainMovie(ContextDTO contextDTO) {
+
+        RestTemplate restTemplate = new RestTemplate();
         WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
 
-        if (queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
-            webhookReponseDTO = this.getGenreForUser();
-        } else {
-            webhookReponseDTO = this.getMovieByGenre(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
+        List<MessageDTO> messageDTOList = new ArrayList<>();
+        MessageDTO messageSimpleResponse = new MessageDTO();
+        messageSimpleResponse.setPlatform("ACTIONS_ON_GOOGLE");
+        SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
+        SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
+        simpleResponseDTO.setTextToSpeech("Voici les informations !!");
+        simpleResponsesDTO.setSimpleResponses(List.of(simpleResponseDTO));
+        messageSimpleResponse.setSimpleResponses(simpleResponsesDTO);
+        messageDTOList.add(messageSimpleResponse);
+
+        MessageDTO messageCard= new MessageDTO();
+        messageCard.setPlatform("ACTIONS_ON_GOOGLE");
+        BasicCardDTO basicCardDTO = new BasicCardDTO();
+
+        MovieDTO movieDTO = restTemplate.getForObject(BASE_URL + API_movie + contextDTO.getParameters().get("OPTION") + "?" + API_KEY + "&" + LANGUAGE, MovieDTO.class);
+
+        if(movieDTO.getHomepage() == null || movieDTO.getHomepage() == "") {
+            movieDTO.setHomepage(SITE_MOVIE_DB + movieDTO.getId());
         }
 
-        return webhookReponseDTO;
+        basicCardDTO.setTitle(movieDTO.getTitle());
+        basicCardDTO.setSubtitle("Sorti le " + movieDTO.getRelease_date());
+        basicCardDTO.setFormattedText(movieDTO.getOverview());
+        //image
+        ImageDTO imageDTO = new ImageDTO();
+        imageDTO.setImageUri(API_IMAGE + movieDTO.getPoster_path());
+        imageDTO.setAccessibilityText(movieDTO.getTitle());
+        basicCardDTO.setImage(imageDTO);
+        //button
+        ButtonDTO buttonDTO = new ButtonDTO();
+        buttonDTO.setTitle("Voir le film");
+        OpenUrlActionDTO openUrlActionDTO = new OpenUrlActionDTO();
+        openUrlActionDTO.setUrl(movieDTO.getHomepage());
+        buttonDTO.setOpenUrlAction(openUrlActionDTO);
+        basicCardDTO.setButton(buttonDTO);
 
+        messageCard.setBasicCard(basicCardDTO);
+        messageDTOList.add(messageCard);
+        webhookReponseDTO.setFulfillmentMessages(messageDTOList);
+
+        return webhookReponseDTO;
     }
 
     //"Action";"Aventure";"Animation";"Comédie";"Crime";""Drame";"Familial";
@@ -48,7 +99,7 @@ public class MovieService {
         messageSimpleResponse.setPlatform("ACTIONS_ON_GOOGLE");
         SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
         SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
-        simpleResponseDTO.setTextToSpeech("Voici les filmes que je te propose !!");
+        simpleResponseDTO.setTextToSpeech("Voici les films que je te propose !!");
         simpleResponsesDTO.setSimpleResponses(List.of(simpleResponseDTO));
         messageSimpleResponse.setSimpleResponses(simpleResponsesDTO);
         messageDTOList.add(messageSimpleResponse);
