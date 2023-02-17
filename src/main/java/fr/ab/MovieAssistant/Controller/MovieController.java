@@ -19,7 +19,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
-    private static Logger logger = LoggerFactory.getLogger(Slf4j.class);
+    //private static Logger logger = LoggerFactory.getLogger(Slf4j.class);
 
     @GetMapping("/hello")
     public ResponseEntity<String> getHello() {
@@ -29,7 +29,7 @@ public class MovieController {
     @PostMapping("/request")
     public ResponseEntity<WebhookReponseDTO> postRequest(@RequestBody QueryRequestDTO queryRequestDTO) {
 
-        logger.info("queryRequestDTO : " + queryRequestDTO);
+        //logger.info("queryRequestDTO : " + queryRequestDTO);
         // Check if queryRequest is correct
         if(queryRequestDTO.getQueryResult()==null || queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getQueryText().equals("") || queryRequestDTO.getQueryResult().getParameters()==null ) {
             WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
