@@ -38,7 +38,7 @@ public class MovieService {
         }
 
         if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")){
-            return this.getGenreForUser();
+            return this.getGenreForUser(false);
         }
 
         return this.getMovieByGenre(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
@@ -152,17 +152,28 @@ public class MovieService {
         }
 
         if (idGenre == 0L) {
-            simpleResponseDTO.setTextToSpeech("Je n'ai pas compris votre demande");
+            webhookReponseDTO = this.getGenreForUser(true);
             return webhookReponseDTO;
         }
 
         return webhookReponseDTO;
     }
 
-    private WebhookReponseDTO getGenreForUser() {
+    public WebhookReponseDTO getGenreForUser(Boolean error) {
 
         WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
         List<MessageDTO> messageDTOList = new ArrayList<>();
+
+        if(error) {
+            MessageDTO messageSimpleResponse = new MessageDTO();
+            messageSimpleResponse.setPlatform("ACTIONS_ON_GOOGLE");
+            SimpleResponsesDTO simpleResponsesDTO = new SimpleResponsesDTO();
+            SimpleResponseDTO simpleResponseDTO = new SimpleResponseDTO();
+            simpleResponseDTO.setTextToSpeech("Je n'ai pas compris votre demande");
+            simpleResponsesDTO.setSimpleResponses(List.of(simpleResponseDTO));
+            messageSimpleResponse.setSimpleResponses(simpleResponsesDTO);
+            messageDTOList.add(messageSimpleResponse);
+        }
 
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setPlatform("ACTIONS_ON_GOOGLE");

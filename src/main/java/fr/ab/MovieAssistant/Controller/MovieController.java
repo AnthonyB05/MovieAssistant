@@ -32,8 +32,7 @@ public class MovieController {
         //logger.info("queryRequestDTO : " + queryRequestDTO);
         // Check if queryRequest is correct
         if(queryRequestDTO.getQueryResult()==null || queryRequestDTO.getQueryResult().getQueryText()==null || queryRequestDTO.getQueryResult().getQueryText().equals("") || queryRequestDTO.getQueryResult().getParameters()==null ) {
-            WebhookReponseDTO webhookReponseDTO = new WebhookReponseDTO();
-            webhookReponseDTO.setFulfillmentText("Je n'ai pas compris votre demande");
+            WebhookReponseDTO webhookReponseDTO = movieService.getGenreForUser(true);
             return ResponseEntity.ok(webhookReponseDTO);
         }
 
