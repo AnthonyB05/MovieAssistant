@@ -77,13 +77,13 @@ public class MovieService {
         imageDTO.setImageUri(API_IMAGE + movieDTO.getPoster_path());
         imageDTO.setAccessibilityText(movieDTO.getTitle());
         basicCardDTO.setImage(imageDTO);
-        //button
+        //buttons
         ButtonDTO buttonDTO = new ButtonDTO();
         buttonDTO.setTitle("Voir le film");
         OpenUrlActionDTO openUrlActionDTO = new OpenUrlActionDTO();
         openUrlActionDTO.setUrl(movieDTO.getHomepage());
         buttonDTO.setOpenUrlAction(openUrlActionDTO);
-        basicCardDTO.setButton(buttonDTO);
+        basicCardDTO.setButtons(List.of(buttonDTO));
 
         messageCard.setBasicCard(basicCardDTO);
         messageDTOList.add(messageCard);

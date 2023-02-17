@@ -1,12 +1,14 @@
 package fr.ab.MovieAssistant.DTO;
 
+import java.util.List;
+
 public class BasicCardDTO {
 
     private String title;
     private String subtitle;
     private String formattedText;
     private ImageDTO image;
-    private ButtonDTO buttons;
+    private List<ButtonDTO> buttons;
 
     public String getTitle() {
         return title;
@@ -40,12 +42,11 @@ public class BasicCardDTO {
         this.image = image;
     }
 
-    public ButtonDTO getButton() {
+    public List<ButtonDTO> getButtons() {
         return buttons;
     }
 
-    public void setButton(ButtonDTO buttons) {
+    public void setButtons(List<ButtonDTO> buttons) {
         this.buttons = buttons;
     }
-
 }
