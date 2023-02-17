@@ -6,7 +6,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MovieService {
@@ -80,9 +79,9 @@ public class MovieService {
         //buttons
         ButtonDTO buttonDTO = new ButtonDTO();
         buttonDTO.setTitle("Voir le film");
-        OpenUrlActionDTO openUrlActionDTO = new OpenUrlActionDTO();
-        openUrlActionDTO.setUrl(movieDTO.getHomepage());
-        buttonDTO.setOpenUrlAction(openUrlActionDTO);
+        OpenUriActionDTO openUriActionDTO = new OpenUriActionDTO();
+        openUriActionDTO.setUri(movieDTO.getHomepage());
+        buttonDTO.setOpenUriAction(openUriActionDTO);
         basicCardDTO.setButtons(List.of(buttonDTO));
 
         messageCard.setBasicCard(basicCardDTO);

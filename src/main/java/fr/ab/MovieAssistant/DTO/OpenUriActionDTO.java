@@ -1,13 +1,13 @@
 package fr.ab.MovieAssistant.DTO;
 
-public class OpenUrlActionDTO {
+public class OpenUriActionDTO {
     private String uri;
 
-    public String getUrl() {
+    public String getUri() {
         return uri;
     }
 
-    public void setUrl(String uri) {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 }

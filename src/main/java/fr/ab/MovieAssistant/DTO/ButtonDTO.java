@@ -2,7 +2,7 @@ package fr.ab.MovieAssistant.DTO;
 
 public class ButtonDTO {
     private String title;
-    private OpenUrlActionDTO openUriAction;
+    private OpenUriActionDTO openUriAction;
 
     public String getTitle() {
         return title;
@@ -12,11 +12,11 @@ public class ButtonDTO {
         this.title = title;
     }
 
-    public OpenUrlActionDTO getOpenUrlAction() {
+    public OpenUriActionDTO getOpenUriAction() {
         return openUriAction;
     }
 
-    public void setOpenUrlAction(OpenUrlActionDTO openUriAction) {
+    public void setOpenUriAction(OpenUriActionDTO openUriAction) {
         this.openUriAction = openUriAction;
     }
 }
