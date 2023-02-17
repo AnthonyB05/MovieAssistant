@@ -6,7 +6,7 @@ public class BasicCardDTO {
     private String subtitle;
     private String formattedText;
     private ImageDTO image;
-    private ButtonDTO button;
+    private ButtonDTO buttons;
 
     public String getTitle() {
         return title;
@@ -41,11 +41,11 @@ public class BasicCardDTO {
     }
 
     public ButtonDTO getButton() {
-        return button;
+        return buttons;
     }
 
-    public void setButton(ButtonDTO button) {
-        this.button = button;
+    public void setButton(ButtonDTO buttons) {
+        this.buttons = buttons;
     }
 
 }
