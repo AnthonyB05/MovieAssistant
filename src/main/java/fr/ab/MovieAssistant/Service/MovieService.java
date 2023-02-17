@@ -26,17 +26,22 @@ public class MovieService {
 
     public WebhookReponseDTO getMovie(QueryRequestDTO queryRequestDTO) {
 
-        if (queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")) {
-            return this.getGenreForUser();
-        } else {
+        if(queryRequestDTO.getQueryResult().getParameters().getGenre()==null){
             List<ContextDTO> context = queryRequestDTO.getQueryResult().getOutputContexts();
             for (ContextDTO contextDTO : context) {
                 if(contextDTO.getParameters().containsKey("OPTION")) {
-                   return this.getExplainMovie(contextDTO);
+                    return this.getExplainMovie(contextDTO);
                 }
             }
             return this.getMovieByGenre(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
         }
+
+        if(queryRequestDTO.getQueryResult().getParameters().getGenre().equals("")){
+            return this.getGenreForUser();
+        }
+
+        return this.getMovieByGenre(queryRequestDTO.getQueryResult().getParameters().getGenre().toLowerCase());
+
     }
 
     private WebhookReponseDTO getExplainMovie(ContextDTO contextDTO) {
