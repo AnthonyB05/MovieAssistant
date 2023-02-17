@@ -20,7 +20,7 @@ public class MovieService {
     private final String API_genre = "/genre/movie/list";
     private final String API_discoverMovie = "/discover/movie";
     private final String API_movie = "/movie/";
-    private final String API_IMAGE = "https://image.tmdb.org/t/p/original/";
+    private final String API_IMAGE = "https://image.tmdb.org/t/p/original";
     private final String SITE_MOVIE_DB = "https://www.themoviedb.org/movie/";
 
 
