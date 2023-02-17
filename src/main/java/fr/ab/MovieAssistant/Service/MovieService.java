@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -138,6 +140,7 @@ public class MovieService {
                     itemDTOList.add(itemDTO);
                 }
 
+                Collections.shuffle(itemDTOList);
                 carouselSelectDTO.setItems(itemDTOList.subList(0, 3));
                 messageCarousel.setCarouselSelect(carouselSelectDTO);
                 messageDTOList.add(messageCarousel);
