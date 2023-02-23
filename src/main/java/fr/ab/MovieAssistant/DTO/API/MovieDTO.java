@@ -1,4 +1,4 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.API;
 
 public class MovieDTO {
     private String id;

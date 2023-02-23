@@ -1,4 +1,6 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response.Message.Carousel;
+
+import fr.ab.MovieAssistant.DTO.ImageDTO;
 
 public class ItemDTO {
 

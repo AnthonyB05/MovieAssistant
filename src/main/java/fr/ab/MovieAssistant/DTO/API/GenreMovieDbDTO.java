@@ -1,7 +1,6 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.API;
 
 import java.util.List;
-import java.util.Map;
 
 public class GenreMovieDbDTO {
     private List<GenreDTO> genres;

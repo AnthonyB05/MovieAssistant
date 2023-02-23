@@ -1,4 +1,7 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response;
+
+import fr.ab.MovieAssistant.DTO.Request.ContextDTO;
+import fr.ab.MovieAssistant.DTO.Response.Message.MessageDTO;
 
 import java.io.Serializable;
 import java.util.List;

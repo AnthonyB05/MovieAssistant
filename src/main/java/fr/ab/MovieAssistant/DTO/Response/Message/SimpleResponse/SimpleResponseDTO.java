@@ -1,4 +1,4 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response.Message.SimpleResponse;
 
 public class SimpleResponseDTO {
 

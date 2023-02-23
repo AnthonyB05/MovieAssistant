@@ -1,4 +1,4 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response.Message.Suggestion;
 
 import java.util.ArrayList;
 import java.util.List;

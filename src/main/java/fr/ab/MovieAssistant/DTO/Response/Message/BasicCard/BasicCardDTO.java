@@ -1,4 +1,7 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response.Message.BasicCard;
+
+import fr.ab.MovieAssistant.DTO.ButtonDTO;
+import fr.ab.MovieAssistant.DTO.ImageDTO;
 
 import java.util.List;
 

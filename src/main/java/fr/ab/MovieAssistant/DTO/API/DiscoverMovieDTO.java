@@ -1,4 +1,4 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.API;
 
 import java.time.DayOfWeek;
 import java.util.List;

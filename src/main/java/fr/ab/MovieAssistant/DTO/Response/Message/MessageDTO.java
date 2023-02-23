@@ -1,4 +1,10 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.Response.Message;
+
+import fr.ab.MovieAssistant.DTO.Response.Message.BasicCard.BasicCardDTO;
+import fr.ab.MovieAssistant.DTO.Response.Message.Carousel.CarouselSelectDTO;
+import fr.ab.MovieAssistant.DTO.Response.Message.SimpleResponse.SimpleResponsesDTO;
+import fr.ab.MovieAssistant.DTO.Response.Message.Suggestion.SuggestionsDTO;
+import fr.ab.MovieAssistant.DTO.Response.Message.TableCard.TableCardDTO;
 
 public class MessageDTO {
     private String platform;
@@ -6,6 +12,7 @@ public class MessageDTO {
     private SuggestionsDTO suggestions;
     private CarouselSelectDTO carouselSelect;
     private BasicCardDTO basicCard;
+    private TableCardDTO tableCard;
 
     public String getPlatform() {
         return platform;
@@ -46,6 +53,15 @@ public class MessageDTO {
     public void setBasicCard(BasicCardDTO basicCard) {
         this.basicCard = basicCard;
     }
+
+    public TableCardDTO getTableCard() {
+        return tableCard;
+    }
+
+    public void setTableCard(TableCardDTO tableCard) {
+        this.tableCard = tableCard;
+    }
+
 }
 
 

@@ -1,4 +1,6 @@
-package fr.ab.MovieAssistant.DTO;
+package fr.ab.MovieAssistant.DTO.API;
+
+import fr.ab.MovieAssistant.DTO.API.DiscoverMovieDTO;
 
 import java.util.List;
 
